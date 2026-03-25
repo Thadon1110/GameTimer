@@ -92,9 +92,9 @@ export const useSettingsStore = create<SettingsState>()(
 			migrate: (persisted: unknown, version: number) => {
 				const state = persisted as Record<string, unknown>;
 				if (version < 6) {
-					state.onboardingCompleted = true; // existing users skip onboarding
+					state.onboardingCompleted = true;
 				}
-				return state as SettingsState;
+				return state as unknown as SettingsState;
 			},
 		},
 	),

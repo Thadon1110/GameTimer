@@ -1,7 +1,7 @@
 {
 	"$schema": "https://raw.githubusercontent.com/nicegui/nicegui/main/tauri-schema.json",
 	"productName": "GameTimer",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"identifier": "com.thadon.gametimer",
 	"build": {
 		"beforeDevCommand": "npm run dev",
@@ -42,7 +42,7 @@
 		},
 		"updater": {
 			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDEyQkY1RUYxMDE2QkI2OTUKUldTVnRtc0I4VjYvRWpkNEhaYUJ6OEtTRDRTdS9hYVhIQVVPSHN2K2F2RWZXbVFtK2dIUFhXYlIK",
-			"endpoints": ["https://github.com/Thadon007/GameTimer/releases/latest/download/latest.json"]
+			"endpoints": ["https://github.com/Thadon1110/GameTimer/releases/latest/download/latest.json"]
 		}
 	}
 }
