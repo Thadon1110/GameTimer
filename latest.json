@@ -1,0 +1,11 @@
+﻿{
+    "platforms":  {
+                      "windows-x86_64":  {
+                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWp6TnFuZzE3TXMyNHlCSkM3NDNQTTRRaUoybElIMkVaeEdjYUZINjdQU3M5aHp6Z25HOUNsK3hKVGduUlRibmtmcS85STVUTTEyQnQrTFBDd0RGWGd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NDU3MTE2CWZpbGU6R2FtZVRpbWVyXzAuMi4xX3g2NC1zZXR1cC5uc2lzLnppcApUM1BJTDZ4Z2VTbTdwcmJ1OHQvMk9qK29MNjNLd1VrdE1LVHpNS3NRVXZkbXpOb2xFZ3U2L242OG4wT0lRVzlOb0k3Y01IR1hKRW1CZGNvaXc1U2VBZz09Cg==",
+                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.2.1/GameTimer_0.2.1_x64-setup.nsis.zip"
+                                         }
+                  },
+    "pub_date":  "2026-03-25T17:46:47Z",
+    "version":  "0.2.1",
+    "notes":  "Fix: scrollowanie listy gier w onboardingu, mozliwosc wpisania wlasnego limitu dziennego"
+}

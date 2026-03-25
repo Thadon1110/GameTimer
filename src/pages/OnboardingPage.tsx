@@ -131,6 +131,18 @@ function SettingsStep() {
 										{mins / 60}h
 									</button>
 								))}
+								<input
+									type='number'
+									min={15}
+									max={720}
+									value={dailyLimitMinutes}
+									onChange={(e) => {
+										const v = parseInt(e.target.value);
+										if (!isNaN(v) && v >= 15 && v <= 720) setDailyLimitMinutes(v);
+									}}
+									className='w-16 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-2 py-1.5 text-center text-xs text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]'
+									placeholder='min'
+								/>
 							</div>
 						</div>
 					)}
@@ -209,8 +221,8 @@ function GamesStep() {
 	const isAdded = (exe: string) => games.some((g) => g.processName.toLowerCase() === exe.toLowerCase());
 
 	return (
-		<div className='flex flex-1 flex-col gap-5'>
-			<div className='text-center'>
+		<div className='flex min-h-0 flex-1 flex-col gap-5'>
+			<div className='shrink-0 text-center'>
 				<h2 className='text-2xl font-bold'>Dodaj swoje gry</h2>
 				<p className='mt-1 text-sm text-[var(--color-text-muted)]'>Zeskanuj zainstalowane gry lub dodaj je później</p>
 			</div>
@@ -230,7 +242,7 @@ function GamesStep() {
 					<p className='text-xs text-[var(--color-text-muted)]'>Sprawdzi Steam, Epic, GOG, EA, Ubisoft, Riot i inne</p>
 				</div>
 			) : (
-				<div className='flex flex-1 flex-col gap-3 overflow-hidden'>
+				<div className='flex min-h-0 flex-1 flex-col gap-3 overflow-hidden'>
 					{scannedGames.length === 0 ? (
 						<div className='flex flex-1 flex-col items-center justify-center gap-2 text-center'>
 							<Gamepad2 size={32} className='text-[var(--color-text-muted)]' />
