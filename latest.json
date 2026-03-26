@@ -1,11 +1,11 @@
 {
     "platforms":  {
                       "windows-x86_64":  {
-                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWp6TnFuZzE3TXMyNHlCSkM3NDNQTTRRaUoybElIMkVaeEdjYUZINjdQU3M5aHp6Z25HOUNsK3hKVGduUlRibmtmcS85STVUTTEyQnQrTFBDd0RGWGd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NDU3MTE2CWZpbGU6R2FtZVRpbWVyXzAuMi4xX3g2NC1zZXR1cC5uc2lzLnppcApUM1BJTDZ4Z2VTbTdwcmJ1OHQvMk9qK29MNjNLd1VrdE1LVHpNS3NRVXZkbXpOb2xFZ3U2L242OG4wT0lRVzlOb0k3Y01IR1hKRW1CZGNvaXc1U2VBZz09Cg==",
-                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.2.1/GameTimer_0.2.1_x64-setup.nsis.zip"
+                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWdTdE8zd2dNUXVYU0lwc3k2K1hBcDN1WGFGVit3dHoxMWlCNHNGemtGcENYMk5ySlcxMEh5REdOQmZZdUhLQ3NvTHo2NnFlR05XTFlVRE9lWlM5ZlFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NTUxNTM4CWZpbGU6R2FtZVRpbWVyXzAuMy4wX3g2NC1zZXR1cC5uc2lzLnppcApQQ0NSZExKYnBtamZDcHpjUUVUNndEcWJlL1ZMYkkvN2ppQ096dW5Jbm9hUXJhams3S1FPWkNFQXF1UjVpaTdhd29EcXZIQ3A3SmdWeXdNNjNHeXpEZz09Cg==",
+                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.3.0/GameTimer_0.3.0_x64-setup.nsis.zip"
                                          }
                   },
-    "pub_date":  "2026-03-25T17:46:47Z",
-    "version":  "0.2.1",
-    "notes":  "Fix: scrollowanie listy gier w onboardingu, mozliwosc wpisania wlasnego limitu dziennego"
+    "pub_date":  "2026-03-26T19:59:49Z",
+    "version":  "0.3.0",
+    "notes":  "Naprawa liczenia czasu (delta-based tick), countdown w powiadomieniach toast, dynamiczna wersja w UI, fix BOM w latest.json"
 }
