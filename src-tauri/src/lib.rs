@@ -684,7 +684,7 @@ fn url_encode(s: &str) -> String {
 }
 
 #[tauri::command]
-async fn show_toast(app: tauri::AppHandle, title: String, body: String, toast_type: String) -> Result<(), String> {
+async fn show_toast(app: tauri::AppHandle, title: String, body: String, toast_type: String, duration_secs: u32) -> Result<(), String> {
     let ts = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap_or_default()
@@ -692,10 +692,11 @@ async fn show_toast(app: tauri::AppHandle, title: String, body: String, toast_ty
     let label = format!("toast_{}", ts);
 
     let url = format!(
-        "toast.html?title={}&body={}&type={}",
+        "toast.html?title={}&body={}&type={}&duration={}",
         url_encode(&title),
         url_encode(&body),
-        url_encode(&toast_type)
+        url_encode(&toast_type),
+        duration_secs
     );
 
     let (x, y) = if let Ok(Some(monitor)) = app.primary_monitor() {
@@ -722,8 +723,9 @@ async fn show_toast(app: tauri::AppHandle, title: String, body: String, toast_ty
         .map_err(|e| e.to_string())?;
 
     let app_handle = app.clone();
+    let close_after = if duration_secs > 0 { duration_secs as u64 + 2 } else { 8 };
     std::thread::spawn(move || {
-        std::thread::sleep(std::time::Duration::from_secs(8));
+        std::thread::sleep(std::time::Duration::from_secs(close_after));
         if let Some(w) = app_handle.get_webview_window(&label) {
             let _ = w.close();
         }

@@ -101,6 +101,7 @@ export const useTimerStore = create<TimerState>()(
 				set({
 					isPaused: false,
 					currentSession: { ...currentSession, breaks },
+					lastTickAt: Date.now(),
 				});
 			},
 
@@ -125,9 +126,18 @@ export const useTimerStore = create<TimerState>()(
 			},
 
 			tick: () => {
-				const { isRunning, isPaused, elapsed } = get();
+				const { isRunning, isPaused, elapsed, lastTickAt } = get();
 				if (isRunning && !isPaused) {
-					set({ elapsed: elapsed + 1, lastTickAt: Date.now() });
+					const now = Date.now();
+					if (lastTickAt) {
+						const deltaMs = now - lastTickAt;
+						const deltaSec = Math.floor(deltaMs / 1000);
+						if (deltaSec >= 1) {
+							set({ elapsed: elapsed + deltaSec, lastTickAt: lastTickAt + deltaSec * 1000 });
+						}
+					} else {
+						set({ elapsed: elapsed + 1, lastTickAt: now });
+					}
 				}
 			},
 

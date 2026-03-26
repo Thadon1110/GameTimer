@@ -154,7 +154,7 @@ export function useBreakReminder() {
 			playSound();
 			if (mode === 'toast') {
 				try {
-					await invoke('show_toast', { title, body, toastType });
+					await invoke('show_toast', { title, body, toastType, durationSecs: durationSecs ?? 0 });
 				} catch {
 					/* ignore */
 				}

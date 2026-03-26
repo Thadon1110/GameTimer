@@ -25,6 +25,7 @@
 				color: #f8fafc;
 				height: 100%;
 				animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+				position: relative;
 			}
 			.toast.eyebreak {
 				border-left-color: #60a5fa;
@@ -64,6 +65,37 @@
 			.close:hover {
 				color: #f8fafc;
 				background: rgba(255, 255, 255, 0.08);
+			}
+			.timer-badge {
+				font-family: 'Consolas', 'Courier New', monospace;
+				font-size: 12px;
+				padding: 2px 8px;
+				border-radius: 6px;
+				white-space: nowrap;
+				flex-shrink: 0;
+				color: #f59e0b;
+				background: rgba(245, 158, 11, 0.15);
+			}
+			.timer-badge.eyebreak {
+				color: #60a5fa;
+				background: rgba(96, 165, 250, 0.15);
+			}
+			.progress-track {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: rgba(255, 255, 255, 0.06);
+			}
+			.progress-fill {
+				height: 100%;
+				width: 100%;
+				background: #f59e0b;
+				transition: width 1s linear;
+			}
+			.progress-fill.eyebreak {
+				background: #60a5fa;
 			}
 			@keyframes slideIn {
 				from {
@@ -111,13 +143,18 @@
 				<div class="title" id="t"></div>
 				<div class="body" id="b"></div>
 			</div>
+			<span class="timer-badge" id="timer" style="display: none"></span>
 			<button class="close" id="closeBtn">&times;</button>
+			<div class="progress-track" id="progressTrack" style="display: none">
+				<div class="progress-fill" id="progressBar"></div>
+			</div>
 		</div>
 		<script>
 			var params = new URLSearchParams(window.location.search);
 			document.getElementById('t').textContent = params.get('title') || 'GameTimer';
 			document.getElementById('b').textContent = params.get('body') || '';
 			var type = params.get('type') || '';
+			var duration = parseInt(params.get('duration') || '0');
 			if (type === 'eyebreak') {
 				document.getElementById('toast').classList.add('eyebreak');
 				document.getElementById('icon-warn').style.display = 'none';
@@ -141,6 +178,13 @@
 				}
 			}
 
+			function pad(n) {
+				return n < 10 ? '0' + n : '' + n;
+			}
+			function formatTime(s) {
+				return pad(Math.floor(s / 60)) + ':' + pad(s % 60);
+			}
+
 			// Show window only after content is painted
 			requestAnimationFrame(function () {
 				requestAnimationFrame(function () {
@@ -151,6 +195,32 @@
 			});
 
 			document.getElementById('closeBtn').onclick = closeWindow;
+
+			if (duration > 0) {
+				var remaining = duration;
+				var timerEl = document.getElementById('timer');
+				var progressTrack = document.getElementById('progressTrack');
+				var progressBar = document.getElementById('progressBar');
+				timerEl.style.display = 'inline-block';
+				progressTrack.style.display = 'block';
+				if (type === 'eyebreak') {
+					timerEl.classList.add('eyebreak');
+					progressBar.classList.add('eyebreak');
+				}
+				timerEl.textContent = formatTime(remaining);
+				var iv = setInterval(function () {
+					remaining--;
+					if (remaining <= 0) {
+						timerEl.textContent = '00:00';
+						progressBar.style.width = '0%';
+						clearInterval(iv);
+						setTimeout(closeWindow, 400);
+					} else {
+						timerEl.textContent = formatTime(remaining);
+						progressBar.style.width = (remaining / duration) * 100 + '%';
+					}
+				}, 1000);
+			}
 		</script>
 	</body>
 </html>

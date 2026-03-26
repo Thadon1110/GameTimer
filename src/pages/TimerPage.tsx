@@ -28,6 +28,16 @@ export default function TimerPage() {
 		return () => clearInterval(interval);
 	}, [isRunning, isPaused, tick]);
 
+	// Immediately update elapsed when window regains focus
+	useEffect(() => {
+		if (!isRunning || isPaused) return;
+		const onVisible = () => {
+			if (document.visibilityState === 'visible') tick();
+		};
+		document.addEventListener('visibilitychange', onVisible);
+		return () => document.removeEventListener('visibilitychange', onVisible);
+	}, [isRunning, isPaused, tick]);
+
 	const dailyProgress = dailyLimitEnabled ? Math.min(100, (todayTotal / dailyLimitSeconds) * 100) : 0;
 
 	// Not playing — idle state

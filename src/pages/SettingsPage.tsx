@@ -21,6 +21,7 @@ import { useSettingsStore, type AlertMode, type Ringtone } from '@/stores/settin
 import { useBreakReminder } from '@/hooks/useBreakReminder';
 import { useUpdater } from '@/hooks/useUpdater';
 import { enable, disable, isEnabled } from '@tauri-apps/plugin-autostart';
+import { getVersion } from '@tauri-apps/api/app';
 
 function SettingRow({
 	icon: Icon,
@@ -115,6 +116,14 @@ function ModeSelector({ value, onChange }: { value: AlertMode; onChange: (v: Ale
 			))}
 		</div>
 	);
+}
+
+function AppVersion() {
+	const [version, setVersion] = useState('...');
+	useEffect(() => {
+		getVersion().then((v) => setVersion(v));
+	}, []);
+	return <div className='text-xs text-[var(--color-text-muted)]'>v{version}</div>;
 }
 
 function UpdateSection() {
@@ -403,7 +412,7 @@ export default function SettingsPage() {
 						<Moon size={20} className='text-[var(--color-primary)]' />
 						<div>
 							<div className='font-medium'>GameTimer</div>
-							<div className='text-xs text-[var(--color-text-muted)]'>v0.1.0</div>
+							<AppVersion />
 						</div>
 					</div>
 				</div>
