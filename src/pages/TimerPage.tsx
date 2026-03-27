@@ -14,7 +14,7 @@ export default function TimerPage() {
 	const { dailyLimitEnabled, eyeBreakEnabled } = useSettingsStore();
 	const navigate = useNavigate();
 
-	const { todayTotal, dailyLimitSeconds, dailyRemaining, isInEyeBreak, eyeBreakCountdown } = useBreakReminder();
+	const { todayTotal, dailyLimitSeconds, dailyRemaining, isInEyeBreak, eyeBreakCountdown, eyeBreakProgress } = useBreakReminder();
 
 	// Recover session on app startup (handles app/PC restart)
 	useEffect(() => {
@@ -122,6 +122,22 @@ export default function TimerPage() {
 							strokeDashoffset={`${2 * Math.PI * 90 * (1 - dailyProgress / 100)}`}
 							transform='rotate(-90 100 100)'
 							className='transition-all duration-1000'
+						/>
+					)}
+					{eyeBreakEnabled && (
+						<circle
+							cx='100'
+							cy='100'
+							r='82'
+							fill='none'
+							stroke={isInEyeBreak ? '#60a5fa' : 'var(--color-border)'}
+							strokeWidth='2'
+							strokeLinecap='round'
+							strokeDasharray={`${2 * Math.PI * 82}`}
+							strokeDashoffset={`${2 * Math.PI * 82 * (1 - Math.min(100, eyeBreakProgress) / 100)}`}
+							transform='rotate(-90 100 100)'
+							className='transition-all duration-1000'
+							opacity={0.6}
 						/>
 					)}
 				</svg>

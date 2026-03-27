@@ -19,7 +19,8 @@ export function useBreakReminder() {
 	} = useSettingsStore();
 
 	const dailyLimitNotified = useRef(false);
-	const lastEyeBreakAt = useRef(0);
+	const lastEyeBreakCycle = useRef(-1);
+	const prevElapsed = useRef(0);
 
 	// Calculate today's total gaming time (seconds)
 	const todayTotal = (() => {
@@ -195,9 +196,15 @@ export function useBreakReminder() {
 		if (!isRunning || isPaused || !eyeBreakEnabled) return;
 		const currentCycle = Math.floor(elapsed / eyeBreakCycleTotal);
 		const posInCycle = elapsed % eyeBreakCycleTotal;
+		const prevPos = prevElapsed.current % eyeBreakCycleTotal;
 
-		if (posInCycle === eyeBreakIntervalSec && currentCycle !== lastEyeBreakAt.current) {
-			lastEyeBreakAt.current = currentCycle;
+		// Detect crossing the break boundary: previous position was before, current is at or past
+		const crossedBoundary = prevPos < eyeBreakIntervalSec && posInCycle >= eyeBreakIntervalSec;
+		// Also handle cycle wrap (elapsed jumped past a full cycle)
+		const jumpedCycle = currentCycle > lastEyeBreakCycle.current + 1;
+
+		if ((crossedBoundary || jumpedCycle) && currentCycle !== lastEyeBreakCycle.current) {
+			lastEyeBreakCycle.current = currentCycle;
 			triggerAlert(
 				'Czas na przerwę dla oczu',
 				`Grasz już od ${eyeBreakInterval} minut. Oderwij wzrok od ekranu na ${eyeBreakDuration} min.`,
@@ -207,9 +214,7 @@ export function useBreakReminder() {
 			);
 		}
 
-		if (isInEyeBreak && eyeBreakCountdown <= 0) {
-			// Eye break ended
-		}
+		prevElapsed.current = elapsed;
 	}, [
 		isRunning,
 		isPaused,
@@ -218,9 +223,9 @@ export function useBreakReminder() {
 		eyeBreakCycleTotal,
 		eyeBreakIntervalSec,
 		eyeBreakMode,
+		eyeBreakInterval,
 		eyeBreakDuration,
-		isInEyeBreak,
-		eyeBreakCountdown,
+		eyeBreakDurationSec,
 		triggerAlert,
 	]);
 

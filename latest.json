@@ -1,11 +1,11 @@
 {
     "platforms":  {
                       "windows-x86_64":  {
-                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWdTdE8zd2dNUXVYU0lwc3k2K1hBcDN1WGFGVit3dHoxMWlCNHNGemtGcENYMk5ySlcxMEh5REdOQmZZdUhLQ3NvTHo2NnFlR05XTFlVRE9lWlM5ZlFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NTUxNTM4CWZpbGU6R2FtZVRpbWVyXzAuMy4wX3g2NC1zZXR1cC5uc2lzLnppcApQQ0NSZExKYnBtamZDcHpjUUVUNndEcWJlL1ZMYkkvN2ppQ096dW5Jbm9hUXJhams3S1FPWkNFQXF1UjVpaTdhd29EcXZIQ3A3SmdWeXdNNjNHeXpEZz09Cg==",
-                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.3.0/GameTimer_0.3.0_x64-setup.nsis.zip"
+                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWduZVZkVTUwMk0rUUVFaVZ3SDRqUHNtNmtlMEJuTmpVbEM2cGNTQjl0VkRYSlhMRGl6Wm1UMytrVkg5Sk5jaGdyNUJNc1FyRFByL1BhWEpxTDR0dHdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NjA5NTUzCWZpbGU6R2FtZVRpbWVyXzAuMy4xX3g2NC1zZXR1cC5uc2lzLnppcApQcDBEOGxhSkdFRWJoTXNXSThNeWhFQk96VXhOcGZpYXd1aExmeThQM1I2Z3EyUFZidldzb24rU2p2YWEva0VvMUs3ZWpzMnNCQ3gwUGRhekJYTlpDUT09Cg==",
+                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.3.1/GameTimer_0.3.1_x64-setup.nsis.zip"
                                          }
                   },
-    "pub_date":  "2026-03-26T19:59:49Z",
-    "version":  "0.3.0",
-    "notes":  "Naprawa liczenia czasu (delta-based tick), countdown w powiadomieniach toast, dynamiczna wersja w UI, fix BOM w latest.json"
+    "pub_date":  "2026-03-27T12:06:13Z",
+    "version":  "0.3.1",
+    "notes":  "Fix: przerwy dla oczu nie odpalaly sie (bug z delta tick), dodany ring progresu przerwy"
 }
