@@ -5,22 +5,9 @@ import { invoke } from '@tauri-apps/api/core';
 
 export function useBreakReminder() {
 	const { isRunning, isPaused, elapsed, sessions } = useTimerStore();
-	const {
-		dailyLimitEnabled,
-		dailyLimitMinutes,
-		dailyLimitMode,
-		eyeBreakEnabled,
-		eyeBreakInterval,
-		eyeBreakDuration,
-		eyeBreakMode,
-		soundEnabled,
-		soundRingtone,
-		fullscreenOpacity,
-	} = useSettingsStore();
+	const { dailyLimitEnabled, dailyLimitMinutes, dailyLimitMode, soundEnabled, soundRingtone, fullscreenOpacity } = useSettingsStore();
 
 	const dailyLimitNotified = useRef(false);
-	const lastEyeBreakCycle = useRef(-1);
-	const prevElapsed = useRef(0);
 
 	// Calculate today's total gaming time (seconds)
 	const todayTotal = (() => {
@@ -32,13 +19,6 @@ export function useBreakReminder() {
 
 	const dailyLimitSeconds = dailyLimitMinutes * 60;
 	const dailyRemaining = Math.max(0, dailyLimitSeconds - todayTotal);
-
-	const eyeBreakIntervalSec = eyeBreakInterval * 60;
-	const eyeBreakDurationSec = eyeBreakDuration * 60;
-	const eyeBreakCycleTotal = eyeBreakIntervalSec + eyeBreakDurationSec;
-	const eyeBreakCyclePos = elapsed % eyeBreakCycleTotal;
-	const isInEyeBreak = eyeBreakEnabled && eyeBreakCyclePos >= eyeBreakIntervalSec;
-	const eyeBreakCountdown = isInEyeBreak ? eyeBreakCycleTotal - eyeBreakCyclePos : eyeBreakIntervalSec - eyeBreakCyclePos;
 
 	const playSound = useCallback(
 		(overrideRingtone?: Ringtone) => {
@@ -191,44 +171,6 @@ export function useBreakReminder() {
 		}
 	}, [isRunning, isPaused, dailyLimitEnabled, dailyRemaining, dailyLimitMode, dailyLimitMinutes, triggerAlert]);
 
-	// Eye break check
-	useEffect(() => {
-		if (!isRunning || isPaused || !eyeBreakEnabled) return;
-		const currentCycle = Math.floor(elapsed / eyeBreakCycleTotal);
-		const posInCycle = elapsed % eyeBreakCycleTotal;
-		const prevPos = prevElapsed.current % eyeBreakCycleTotal;
-
-		// Detect crossing the break boundary: previous position was before, current is at or past
-		const crossedBoundary = prevPos < eyeBreakIntervalSec && posInCycle >= eyeBreakIntervalSec;
-		// Also handle cycle wrap (elapsed jumped past a full cycle)
-		const jumpedCycle = currentCycle > lastEyeBreakCycle.current + 1;
-
-		if ((crossedBoundary || jumpedCycle) && currentCycle !== lastEyeBreakCycle.current) {
-			lastEyeBreakCycle.current = currentCycle;
-			triggerAlert(
-				'Czas na przerwę dla oczu',
-				`Grasz już od ${eyeBreakInterval} minut. Oderwij wzrok od ekranu na ${eyeBreakDuration} min.`,
-				eyeBreakMode,
-				'eyebreak',
-				eyeBreakDurationSec,
-			);
-		}
-
-		prevElapsed.current = elapsed;
-	}, [
-		isRunning,
-		isPaused,
-		elapsed,
-		eyeBreakEnabled,
-		eyeBreakCycleTotal,
-		eyeBreakIntervalSec,
-		eyeBreakMode,
-		eyeBreakInterval,
-		eyeBreakDuration,
-		eyeBreakDurationSec,
-		triggerAlert,
-	]);
-
 	// Reset daily limit notification at midnight
 	useEffect(() => {
 		dailyLimitNotified.current = false;
@@ -238,9 +180,6 @@ export function useBreakReminder() {
 		todayTotal,
 		dailyLimitSeconds,
 		dailyRemaining,
-		isInEyeBreak,
-		eyeBreakCountdown,
-		eyeBreakProgress: eyeBreakEnabled ? (eyeBreakCyclePos / eyeBreakIntervalSec) * 100 : 0,
 		sendTestAlert,
 		playSound,
 	};

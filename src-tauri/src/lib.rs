@@ -2,7 +2,6 @@ use serde::Serialize;
 use sysinfo::System;
 use tauri::{
     menu::{Menu, MenuItem},
-    tray::TrayIconBuilder,
     Manager,
     WebviewWindowBuilder,
     WebviewUrl,
@@ -805,11 +804,11 @@ pub fn run() {
             let quit_item = MenuItem::with_id(app, "quit", "Zamknij", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&show_item, &quit_item])?;
 
-            TrayIconBuilder::new()
-                .icon(app.default_window_icon().unwrap().clone())
-                .menu(&menu)
-                .tooltip("GameTimer")
-                .on_tray_icon_event(|tray, event| {
+            // Reuse the declarative tray icon from tauri.conf.json (id: "main-tray")
+            if let Some(tray) = app.tray_by_id("main-tray") {
+                tray.set_menu(Some(menu))?;
+                tray.set_tooltip(Some("GameTimer"))?;
+                tray.on_tray_icon_event(|tray, event| {
                     if let tauri::tray::TrayIconEvent::Click { button: tauri::tray::MouseButton::Left, .. } = event {
                         if let Some(window) = tray.app_handle().get_webview_window("main") {
                             let _ = window.show();
@@ -817,8 +816,8 @@ pub fn run() {
                             let _ = window.set_focus();
                         }
                     }
-                })
-                .on_menu_event(|app, event| match event.id.as_ref() {
+                });
+                tray.on_menu_event(|app, event| match event.id.as_ref() {
                     "show" => {
                         if let Some(window) = app.get_webview_window("main") {
                             let _ = window.show();
@@ -830,8 +829,8 @@ pub fn run() {
                         app.exit(0);
                     }
                     _ => {}
-                })
-                .build(app)?;
+                });
+            }
 
             Ok(())
         })

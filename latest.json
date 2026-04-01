@@ -1,11 +1,11 @@
 {
     "platforms":  {
                       "windows-x86_64":  {
-                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWduZVZkVTUwMk0rUUVFaVZ3SDRqUHNtNmtlMEJuTmpVbEM2cGNTQjl0VkRYSlhMRGl6Wm1UMytrVkg5Sk5jaGdyNUJNc1FyRFByL1BhWEpxTDR0dHdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc0NjA5NTUzCWZpbGU6R2FtZVRpbWVyXzAuMy4xX3g2NC1zZXR1cC5uc2lzLnppcApQcDBEOGxhSkdFRWJoTXNXSThNeWhFQk96VXhOcGZpYXd1aExmeThQM1I2Z3EyUFZidldzb24rU2p2YWEva0VvMUs3ZWpzMnNCQ3gwUGRhekJYTlpDUT09Cg==",
-                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.3.1/GameTimer_0.3.1_x64-setup.nsis.zip"
+                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTVnRtc0I4VjYvRWlNN2UrdUlnUXNvZndRNlZnMDdIdDQwb2ROTmhXYVlGV3dIVjZhUVZZYWdRYW9jRUw1dGtPRnJDdFk2WUFHQVRJTmlMTW1wT0hSUXI3OEF6SHRpMUFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MDMzNTIyCWZpbGU6R2FtZVRpbWVyXzAuMy4yX3g2NC1zZXR1cC5uc2lzLnppcApxZmpBZzRCMzhSeGsvQkdYMVluM1JVZlpVN3BpbnljazBQblMwNExoV1IxUzM5TWRzUzF4cFVNbXAvbTVKTnM1L0lUUTNEZjhJbjVmOEExNDhIQUdBdz09Cg==",
+                                             "url":  "https://github.com/Thadon1110/GameTimer/releases/download/v0.3.2/GameTimer_0.3.2_x64-setup.nsis.zip"
                                          }
                   },
-    "pub_date":  "2026-03-27T12:06:13Z",
-    "version":  "0.3.1",
-    "notes":  "Fix: przerwy dla oczu nie odpalaly sie (bug z delta tick), dodany ring progresu przerwy"
+    "pub_date":  "2026-04-01T08:52:47Z",
+    "version":  "0.3.2",
+    "notes":  "Przerwa dla oczu dziala niezaleznie od timera gier (zawsze aktywna), fix podwojnej ikony w trayu"
 }

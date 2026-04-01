@@ -6,15 +6,23 @@ import { useSettingsStore } from '@/stores/settingsStore';
 import { useGameLibraryStore } from '@/stores/gameLibraryStore';
 import { useBreakReminder } from '@/hooks/useBreakReminder';
 import { formatTime } from '@/utils/time';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+
+type EyeBreakContext = {
+	isInBreak: boolean;
+	countdown: number;
+	progress: number;
+	eyeBreakEnabled: boolean;
+};
 
 export default function TimerPage() {
 	const { isRunning, isPaused, elapsed, gameName, tick, recoverSession } = useTimerStore();
 	const { detectedGame, games } = useGameLibraryStore();
-	const { dailyLimitEnabled, eyeBreakEnabled } = useSettingsStore();
+	const { dailyLimitEnabled } = useSettingsStore();
 	const navigate = useNavigate();
 
-	const { todayTotal, dailyLimitSeconds, dailyRemaining, isInEyeBreak, eyeBreakCountdown, eyeBreakProgress } = useBreakReminder();
+	const { todayTotal, dailyLimitSeconds, dailyRemaining } = useBreakReminder();
+	const { isInBreak: isInEyeBreak, countdown: eyeBreakCountdown, progress: eyeBreakProgress, eyeBreakEnabled } = useOutletContext<EyeBreakContext>();
 
 	// Recover session on app startup (handles app/PC restart)
 	useEffect(() => {
